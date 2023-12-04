@@ -8,10 +8,10 @@ Before getting started, ensure that Node.js is installed on your machine. Follow
 1. Clone this repository to your local machine:
    ```bash
         git clone https://github.com/PauVilarEstrada/videogames-publishers.git
-Navigate to the project directory:
-     ````bash
-          cd videogames-publishers
-2. Install the necessary dependencies using npm:
+2. Navigate to the project directory:
+      ```bash
+      cd videogames-publishers
+3. Install the necessary dependencies using npm:
       ```bash
       npm install
 This command will install all the required dependencies, including the necessary node_modules to run the application.
@@ -40,17 +40,21 @@ Este proyecto es una aplicación web dedicada a exhibir videojuegos y sus editor
 ## Instalación
 Antes de comenzar, asegúrate de tener Node.js instalado en tu máquina. Sigue estos pasos para configurar el proyecto:
 
-Clona este repositorio en tu máquina local:
-git clone https://github.com/PauVilarEstrada/videojuegos-editores.git
-Navega al directorio del proyecto:
-### cd videojuegos-editores
-Instala las dependencias necesarias utilizando npm:
-### npm install
+1. Clona este repositorio en tu máquina local:
+    ```bash
+      git clone https://github.com/PauVilarEstrada/videogames-publishers.git
+2. Navega al directorio del proyecto:
+   ```bash
+   cd videojuegos-editores
+3. Instala las dependencias necesarias utilizando npm:
+   ```bash
+      npm install
 Este comando instalará todas las dependencias necesarias, incluidos los node_modules necesarios para ejecutar la aplicación.
 
 ## Uso
-Una vez completada la instalación, inicia la aplicación ejecutando el siguiente comando:
-### npm start
+1. Una vez completada la instalación, inicia la aplicación ejecutando el siguiente comando:
+   ```bash
+   npm start
 Esto abrirá la aplicación en tu navegador web predeterminado. Visita http://localhost:3000 para explorar e interactuar con la información sobre videojuegos y editores.
 
 ## Contribuciones
