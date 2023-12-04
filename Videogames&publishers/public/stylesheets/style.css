@@ -1,0 +1,217 @@
+body {
+  padding: 50px;
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/261/859/757/super-nintendo-nintendo-switch-nintendo-64-nintendo-wii-wallpaper-preview.jpg");
+}
+
+.text_box {
+  width: 40%;
+  height: auto;
+  background-color: #1a2c2a;
+  border-radius: 25px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+}
+
+
+.titulo {
+  color: #FFFFFF;
+  text-align: center;
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a.button1{
+  display:inline-block;
+  width: 200px;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:1em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  text-align:center;
+  transition: all 0.2s;
+}
+a.button1:hover{
+  color:#000000;
+  background-color:#FFFFFF;
+}
+@media all and (max-width:30em){
+  a.button1 {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+
+a.button2{
+  display:inline-block;
+  width: 200px;
+  padding:0.35em 1.2em;
+  border:0.1em solid #009688;
+  margin:0 0.3em 0.3em 0;
+  border-radius:1em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: #009688;
+  text-align:center;
+  transition: all 0.2s;
+}
+a.button2:hover{
+  color:#000000;
+  background-color:#009688;
+}
+@media all and (max-width:30em){
+  a.button2 {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+
+img{
+  display:block;
+  margin:auto;
+  height: 60%;
+  width: 60%;
+  margin-bottom: 5%;
+}
+
+input {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+
+body{
+  background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),url(https://p4.wallpaperbetter.com/wallpaper/934/137/88/nintendo-64-minimalism-black-background-retro-games-hd-wallpaper-preview.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.texto{
+  width: 100%;
+  top: 15%;
+  color: #fff;
+}
+
+
+
+h1{
+  margin: auto;
+  text-align: center;
+  color: white;
+  font: 70px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h3{
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-style: oblique;
+  color: white;
+}
+
+p{
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+
+.content-table {
+  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgb(0, 0, 0);
+  margin: auto;
+}
+
+.content-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  color: white;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+
+.content-table tbody tr.active-row a {
+  font-weight: bold;
+  color: #009879;
+}
+.table_container{
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  align-items: center;
+  width: 72%;
+  height: auto;
+  background-color: #1a2c2a;
+  border-radius: 25px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+}
+
+.content-table a
+{
+  display:block;
+  text-decoration:none;
+  color:#fff
+}
+
+.form-register{
+  width: 500px;
+  height: auto;
+  background-color:#1a2c2a;
+  border-radius: 25px;
+  position: absolute;
+  top:50%;
+  margin-top: -250px;
+  left:50%;
+  margin-left:-250px;
+  text-align: center;
+  color: #fff;
+
+}
+.form-register h1{
+  font-size: 25px;
+  margin-top: 40px;
+  color: #fff;
+  width: 100%;
+}
+.controls{
+  width: 80%;
+  background-color: #1a2c2a;
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 16px;
+  border: 1px solid #009688;
+  font-size: 18px;
+  color: white;
+}

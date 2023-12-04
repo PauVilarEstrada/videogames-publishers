@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Videojuegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.min.js"
+            referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"
+            integrity="sha512-Gn0tSSjkIGAkaZQWjx3Ctl/0dVJuTmjW/f9QyB302kFjU4uTNP4HtA32U2qXs/TRlEsK5CoEqMEMs7LnzLOBsA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body style="background-color: black">
+<header class="header">
+
+    <script id="modify_game_template" type="text/x-handlebars-template">
+        <section class="form-register">
+            <h1 class="titulo">FORMULARIO DE REGISTRO</h1>
+        <form id="modify_game_form">
+            <input class="controls" type="text" name="game_name" id="game_name" placeholder="Nombre"
+                   value="{{:game.game_name}}" required>
+            <input class="controls" type="text" name="genero" id="genero" placeholder="Genero" value="{{:game.genero}}"
+                   required>
+        <select class="controls" id="id_pub" name="id_pub">
+        {{for publishers.publishers}}
+            <option value="{{:id_pub}}">{{:pub_name}}</option>
+        {{/for}}
+        </select>
+            <input class="controls" type="date" name="release_date" id="release_date" placeholder="Fecha de Lanzamiento"
+                   value="{{:game.release_date}}" required>
+            <input class="controls" type="text" name="image_url" id="image_url" placeholder="Enlace de imagen Imagen"
+                   value="{{:game.image_url}}" required>
+            <input class="controls" type="text" name="game_text" id="game_text" placeholder="Descripcion"
+                   value="{{:game.game_text}}" required>
+            <input class="controls" type="text" name="premios" id="premios" value="{{:game.premios}}"
+                   placeholder="Premios">
+            <a href="#" class="button2 modify_game_form" data-id="{{:game.id_game}}">Send</a>
+        </form>
+        </section>
+    </script>
+
+
+    <script id="add_game_template" type="text/x-handlebars-template">
+        <section class="form-register">
+            <h1 class="titulo">FORMULARIO DE REGISTRO</h1>
+        <form id="add_game_form">
+            <input class="controls" type="text" name="game_name" id="game_name" placeholder="Nombre" required>
+            <input class="controls" type="text" name="genero" id="genero" placeholder="Genero" required>
+        <select class="controls" id="id_pub" name="id_pub">
+        {{for publishers}}
+            <option value="{{:id_pub}}">{{:pub_name}}</option>
+        {{/for}}
+        </select>
+            <input class="controls" type="date" name="release_date" id="release_date" placeholder="Fecha de Lanzamiento"
+                   required>
+            <input class="controls" type="text" name="image_url" id="image_url" placeholder="Enlace de imagen Imagen"
+                   required>
+            <input class="controls" type="text" name="game_text" id="game_text" placeholder="Descripcion" required>
+            <input class="controls" type="text" name="premios" id="premios" placeholder="Premios">
+            <a href="#" class="button2 add_game_form">Send</a>
+        </form>
+        </section>
+    </script>
+
+    <script id="juegos" type="text/x-handlebars-template">
+        <div class="texto">
+            <h1 class="titulo">GAMES</h1>
+            <a href="#" class="add button1">ADD</a>
+            {{for games}}
+            <div class="text_box">
+                <div>
+                    <h3>{{:game_name}}</h3>
+                    <p>{{:game_text}}</p>
+                </div>
+                <div class="table_container">
+                    <table class="content-table">
+                        <tbody>
+                        <tr>
+                            <td>Genero</td>
+                            <td>{{:genero}}</td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>Fecha de lanzamiento</td>
+                            <td>{{:release_date}}</td>
+                        </tr>
+                        <tr>
+                            <td>Premios</td>
+                            <td>
+                                {{:premios}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center;">
+                    <img src= {{:image_url}}>
+                </div>
+                <div style="text-align: center">
+                    <a href="#" data-id="{{:id_game}}" class="delete button1">DELETE</a>
+                    <a href="#" data-id="{{:id_game}}" class="modify button1">MODIFY</a>
+                </div>
+            </div>
+        </div>
+        {{/for}}
+    </script>
+
+
+    <!-- destino de los datos renderizados -->
+    <div id="salida"></div>
+
+
+    <script>
+        function addGameForm(event) {
+            event.preventDefault();
+            let form = $("#add_game_form");
+            let parametros = form.serializeObject();
+            console.log('estos son los parametros de addgame', parametros)
+            $.post('/api/games/', parametros, function (result) {
+                showGames();
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        function addGames(event) {
+            event.preventDefault();
+            $.getJSON('/api/publishers/', function (data) {
+                let html = $("#add_game_template").render(data)
+                $("#salida").html(html);
+
+                $(".add_game_form").on("click", addGameForm)
+            });
+        }
+
+
+        function getModifyGameFormParams(event) {
+            event.preventDefault();
+            let form = $('#modify_game_form')
+            let parameters = form.serializeObject()
+            let id = $(this).data("id")
+            $.post('/api/games/' + id, parameters, function (data) {
+                showGames()
+            })
+                .catch(function (error) {
+                    console.log(error)
+                })
+
+        }
+
+        function showModifyGameForm(event) {
+            event.preventDefault();
+            let id = $(this).data("id")
+            console.log(id)
+            $.getJSON('/api/games/' + id, function (dataGames) {
+                $.getJSON('/api/publishers/', function (dataPublishers) {
+                    let game = dataGames[0]
+                    let data = {
+                        'game': game,
+                        'publishers': dataPublishers
+                    }
+                    let html = $("#modify_game_template").render(data)
+                    $("#salida").html(html);
+                    $(".modify_game_form").on("click", getModifyGameFormParams)
+                })
+            });
+
+        }
+
+
+        function deleteGames(event) {
+            event.preventDefault();
+            let id = $(this).data("id")   //quiza hay que poner id_games
+            $.ajax({
+                url: '/api/games/' + id,
+                type: 'DELETE'
+            }).then(function (result) {
+                showGames()
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        function showGames() {
+            $.getJSON('/api/games/', function (data) {
+                console.log(data)
+                //Coger el template
+                let template = $("#juegos")
+
+                //inyectar datos
+                let html_rendered = template.render(data);
+                console.log(html_rendered)
+
+                //mostrar los datos n el div de salida
+                $("#salida").html(html_rendered);
+
+                //se selecciona todos los elementos con class 'delete'
+                $(".delete").on("click", deleteGames);
+
+                //se selecciona todos los elementso con class 'add'
+                $(".add").on("click", addGames);
+
+                //se selecciona todos los elementso con class 'add'
+                $(".modify").on("click", showModifyGameForm);
+            });
+        }
+
+        $(document).ready(function () {
+            showGames();
+        });
+
+
+    </script>
+</header>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publishers</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.min.js"
+            referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"
+            integrity="sha512-Gn0tSSjkIGAkaZQWjx3Ctl/0dVJuTmjW/f9QyB302kFjU4uTNP4HtA32U2qXs/TRlEsK5CoEqMEMs7LnzLOBsA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body style="background-color: black">
+<header class="header">
+    <script id="modify_publisher_template" type="text/x-handlebars-template">
+        <section class="form-register">
+            <h1 class="titulo">FORMULARIO DE REGISTRO</h1>
+            <form id="modify_publisher_form">
+                <input class="controls" type="text" name="pub_name" id="pub_name" placeholder="Nombre"
+                       value="{{:pub_name}}" required>
+                <input class="controls" type="text" name="year" id="year" placeholder="Fundacion" value="{{:year}}"
+                       required>
+                <input class="controls" type="text" name="ceo" id="ceo" placeholder="ceo" value="{{:ceo}}" required>
+                <input class="controls" type="text" name="sede" id="sede" placeholder="sede" value="{{:sede}}" required>
+                <input class="controls" type="text" name="pub_text" id="pub_text" placeholder="Descripcion"
+                       value="{{:pub_text}}" required>
+                <input class="controls" type="text" name="src_image" id="src_image" placeholder="Enlace de imagen"
+                       value="{{:src_image}}" required>
+                <a href="#" class="button2 modify_publisher_form" data-id="{{:id_pub}}">Send</a>
+            </form>
+        </section>
+    </script>
+
+
+    <script id="add_publisher_template" type="text/x-handlebars-template">
+        <section class="form-register">
+            <h1 class="titulo">FORMULARIO DE REGISTRO</h1>
+            <form id="add_publisher_form">
+                <input class="controls" type="text" name="pub_name" id="pub_name" placeholder="Nombre" required>
+                <input class="controls" type="text" name="year" id="year" placeholder="Fundacion" required>
+                <input class="controls" type="text" name="ceo" id="ceo" placeholder="ceo" required>
+                <input class="controls" type="text" name="sede" id="sede" placeholder="sede" required>
+                <input class="controls" type="text" name="pub_text" id="pub_text" placeholder="Descripcion" required>
+                <input class="controls" type="text" name="src_image" id="src_image" placeholder="Enlace de imagen">
+                <a href="#" class="button2 add_publisher_form">Send</a>
+            </form>
+        </section>
+    </script>
+
+
+    <script id="publishers" type="text/x-handlebars-template">
+        <div class="texto">
+            <h1 class="titulo">PUBLISHERS</h1>
+            <a href="#" class="add button1">ADD</a>
+            {{for publishers}}
+            <div class="text_box">
+                <div>
+                    <h3>{{:pub_name}}</h3>
+                    <p>{{:pub_text}}</p>
+                </div>
+                <div class="table_container">
+                    <table class="content-table">
+                        <tbody>
+                        <tr>
+                            <td>Creacion</td>
+                            <td>{{:year}}</td>
+                        </tr>
+                        <tr class="active-row">
+                            <td>CEO</td>
+                            <td>{{:ceo}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sede</td>
+                            <td>
+                                {{:sede}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align: center;">
+                    <img src= {{:src_image}}>
+                </div>
+                <div style="text-align: center">
+                    <a href="#" data-id="{{:id_pub}}" class="delete button1">DELETE</a>
+                    <a href="#" data-id="{{:id_pub}}" class="modify button1">MODIFY</a>
+                </div>
+            </div>
+        </div>
+        {{/for}}
+    </script>
+
+
+    <!-- destino de los datos renderizados -->
+    <div id="salida"></div>
+
+
+    <script>
+        function addPublisherForm(event) {
+            event.preventDefault();
+            let form = $("#add_publisher_form");
+            let parametros = form.serializeObject();
+            console.log('estos son los parametros', parametros)
+            $.post('/api/publishers/', parametros, function (result) {
+                showPublishers();
+            }).catch(function (error) {
+                console.log('error addpublisherform',error)
+            })
+        }
+
+        function addPublisher(event) {
+            event.preventDefault();
+            let html = $("#add_publisher_template").render()
+            $("#salida").html(html);
+            $(".add_publisher_form").on("click", addPublisherForm)
+        }
+
+        function deletePublisher(event) {
+            event.preventDefault();
+            let id = $(this).data("id")
+            $.ajax({
+                url: '/api/publishers/' + id,
+                type: 'DELETE'
+            }).then(function (result) {
+                showPublishers()
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        function getModifyPublisherFormParams(event) {
+            event.preventDefault();
+            let form = $('#modify_publisher_form')
+            let parameters = form.serializeObject()
+            let id = $(this).data("id")
+            $.post('/api/publishers/' + id, parameters, function (data) {
+                showPublishers()
+            })
+                .catch(function (error) {
+                    console.log(error)
+                })
+
+        }
+
+        function showModifyPublisherForm(event) {
+            event.preventDefault();
+            let id = $(this).data("id")
+            console.log(id)
+            $.getJSON('/api/publishers/' + id, function (dataPublisher) {
+                let html = $("#modify_publisher_template").render(dataPublisher)
+                $("#salida").html(html);
+                $(".modify_publisher_form").on("click", getModifyPublisherFormParams)
+            });
+
+        }
+
+        function showPublishers() {
+            $.getJSON('/api/publishers/', function (data) {
+                console.log(data)
+                //Coger el template
+                let template = $("#publishers")
+
+                //inyectar datos
+                let html_rendered = template.render(data);
+                console.log(html_rendered)
+
+                //mostrar los datos n el div de salida
+                $("#salida").html(html_rendered);
+
+                //se selecciona todos los elementos con class 'delete'
+                $(".delete").on("click", deletePublisher);
+
+                //se selecciona todos los elementso con class 'add'
+                $(".add").on("click", addPublisher);
+
+                //se seleccionan todos los elementos con class 'modify'
+                $(".modify").on("click", showModifyPublisherForm);
+
+            });
+        }
+
+        $(document).ready(function () {
+            showPublishers();
+        });
+
+
+    </script>
+</header>
+</body>
+</html>
