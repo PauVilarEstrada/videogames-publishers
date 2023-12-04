@@ -6,7 +6,7 @@ This project is a web application dedicated to showcasing video games and their 
 Before getting started, ensure that Node.js is installed on your machine. Follow these steps to set up the project:
 
 Clone this repository to your local machine:
-git clone https://github.com/your-username/videogames-publishers.git
+git clone https://github.com/PauVilarEstrada/videogames-publishers.git
 Navigate to the project directory:
 ### cd videogames-publishers
 Install the necessary dependencies using npm:
@@ -37,7 +37,7 @@ Este proyecto es una aplicación web dedicada a exhibir videojuegos y sus editor
 Antes de comenzar, asegúrate de tener Node.js instalado en tu máquina. Sigue estos pasos para configurar el proyecto:
 
 Clona este repositorio en tu máquina local:
-git clone https://github.com/tu-usuario/videojuegos-editores.git
+git clone https://github.com/PauVilarEstrada/videojuegos-editores.git
 Navega al directorio del proyecto:
 ### cd videojuegos-editores
 Instala las dependencias necesarias utilizando npm:
