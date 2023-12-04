@@ -5,17 +5,21 @@ This project is a web application dedicated to showcasing video games and their 
 ## Installation
 Before getting started, ensure that Node.js is installed on your machine. Follow these steps to set up the project:
 
-Clone this repository to your local machine:
-git clone https://github.com/PauVilarEstrada/videogames-publishers.git
+1. Clone this repository to your local machine:
+   ```bash
+        git clone https://github.com/PauVilarEstrada/videogames-publishers.git
 Navigate to the project directory:
-### cd videogames-publishers
-Install the necessary dependencies using npm:
-### npm install
+     ````bash
+          cd videogames-publishers
+2. Install the necessary dependencies using npm:
+      ```bash
+      npm install
 This command will install all the required dependencies, including the necessary node_modules to run the application.
 
 ## Usage
-Once the installation is complete, launch the application by running the following command:
-### npm start
+1. Once the installation is complete, launch the application by running the following command:
+      ```bash
+          npm start
 This will open the application in your default web browser. Visit http://localhost:3000 to explore and interact with the video game and publisher information.
 
 ## Contributions
